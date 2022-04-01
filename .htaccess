@@ -1,0 +1,73 @@
+#DO NOT CHANGE THESE SETTINGS UNLESS YOU KNOW WHAT YOU'RE DOING
+ErrorDocument 404 /404
+ErrorDocument 403 /403
+
+Options -Indexes
+Options +FollowSymlinks
+
+SetEnv SiteRoot /
+SetEnv TimeZone Asia/Jakarta
+
+RewriteEngine on
+RewriteBase /
+RewriteRule ^404$ ?404
+RewriteRule ^403$ ?403
+
+RewriteRule ^/admincp$ /index.php
+RewriteRule ^about$ /staff.php
+RewriteRule ^maps$ /maps.php
+RewriteRule ^rsuccess$ /rebirthsuccess.php
+RewriteRule ^logout$ /logout.php
+RewriteRule ^login$ /login.php
+RewriteRule ^logging$ /account.php
+RewriteRule ^ranking$ /ranking.php
+RewriteRule ^register$ /register.php
+RewriteRule ^game$ /game.php
+RewriteRule ^contact$ /contact.php
+RewriteRule ^forgot$ /forgot_password.php
+RewriteRule ^change$ /change.php
+RewriteRule ^reset$ /reset.php
+RewriteRule ^reset_password$ /reset_password.php
+RewriteRule ^rebirth$ /rebirth.php
+RewriteRule ^profile/([a-zA-Z0-9_-]+)$ ?profile&id=$1
+RewriteRule ^upgrade$ /upgrade.php
+RewriteRule ^emailchange$ /emailchange.php
+RewriteRule ^changepass$ /changepass.php
+
+RewriteCond %{ENV:REDIRECT_VAR} !^$
+RewriteRule .* - [E=VAR:%{ENV:REDIRECT_VAR}]
+
+RewriteCond %{ENV:REDIRECT_VAR} (.+)
+RewriteRule .* - [E=VAR:%1]
+
+RewriteCond %{HTTP_HOST} ^184.82.171.68$
+RewriteRule (.*)$ http://www.google.com/$1 [L]
+
+DirectoryIndex index.php
+
+DefaultLanguage en
+AddDefaultCharset UTF-8
+
+ServerSignature Off
+
+AddType application/x-httpd-php .asp
+AddType application/x-shockwave-flash .swf
+AddType image/x-icon .ico
+<FilesMatch "\.(asp|aspx)$">
+  SetHandler application/x-httpd-php
+</FilesMatch>
+<FilesMatch "\.(swf)$">
+  SetHandler application/x-shockwave-flash
+</FilesMatch>
+<FilesMatch "\.(ico)$">
+  SetHandler image/x-icon
+</FilesMatch>
+
+<Files .htaccess>
+  order allow,deny
+  deny from all
+</Files>
+
+<ifmodule mod_php4.c>
+  php_value zlib.output_compression 16386
+</ifmodule>
